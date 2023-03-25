@@ -19,8 +19,8 @@ import sys
 from reddit_scraper import reddit_framework
 
 header = st.container()
-dataset = st.container()
 features = st.container()
+model = st.container()
 
 
 with header:
@@ -28,12 +28,7 @@ with header:
     st.text("This is a demo for scrawping the Reddit website. Other website will be developed in April")
     
     
-# with features:
-#     st.text("""Define the range of time for crawling. The format of date should be like "2023-03-31" """)
-#     input_feature = sel_col.text_input()
 
-
-# layout 
 col1, col2 =st.columns(2)
 
 with features:
@@ -48,6 +43,8 @@ with features:
     
     keyword_1 = st.text_input("Please input the name of gpu card: (ex: 6900 xt")
     keyword_2 = st.text_input("Please input the name of gpu card: (ex 6900xt")
+    
+with model:
     
     df = reddit_framework(keyword_1, keyword_2, start_date, end_date)
     
