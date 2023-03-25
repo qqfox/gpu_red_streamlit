@@ -5,6 +5,14 @@ Created on Fri Mar 24 23:31:26 2023
 @author: Quinn Quinn
 main.py to run all the scripts for all websites
 """
+import requests
+import re
+import praw
+from datetime import date
+import csv
+import pandas as pd
+import time
+import sys
 
 from reddit_scraper import reddit_framework
 
