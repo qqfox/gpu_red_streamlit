@@ -50,32 +50,23 @@ with header:
     st.text("This is a demo for scrawping the Reddit website. Other website will be developed in April")
     
     
+# https://discuss.streamlit.io/t/run-app-only-after-users-enters-all-inputs/8998/2
+with st.form(key='my_form_to_submit'):
+    
+    # d1 = st.date_input("Define the start date for crawling.")
+    # start_date = st.write('Start date:', d1)
+    start_date = st.text_input("Start date input: ")
+    end_date = st.text_input("End date input: ")
 
-with features:
+    # d2 = st.date_input("Define the end date for crawling.")
+    # end_date = st.write('End date:', d2)
     
-    load = st.button('Load Data')
+    keyword_1 = st.text_input("Please input the name of gpu card: (ex: 6900 xt)")
+    keyword_2 = st.text_input("Please input the name of gpu card: (ex 6900xt)")
     
-    # initialize session state
-    if "load_state" not in st.session_state:
-        st.session_state.load_state = False
-        
-    if load or st.session_state.load_state:
-        st.session_state.load_state = True
-        
-        # d1 = st.date_input("Define the start date for crawling.")
-        # start_date = st.write('Start date:', d1)
-        start_date = st.text_input("Start date input: ")
-        end_date = st.text_input("End date input: ")
-    
-        # d2 = st.date_input("Define the end date for crawling.")
-        # end_date = st.write('End date:', d2)
-        
-        keyword_1 = st.text_input("Please input the name of gpu card: (ex: 6900 xt)")
-        keyword_2 = st.text_input("Please input the name of gpu card: (ex 6900xt)")
-        
-    
-with model:
-    
+    submit_button = st.form_submit_button(label='Submit')
+
+if submit_button:
     df = reddit_framework(keyword_1, keyword_2, start_date, end_date)
     
     # display the dataframe
@@ -85,6 +76,10 @@ with model:
     st.download_button(label = "Download Data", data = df.to_csv(),
                         file_name = "Reddit_dataset.csv",
                         mime='text/csv')
+    
+
+    
+    
     
     
     
