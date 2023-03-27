@@ -52,23 +52,31 @@ with header:
     
 
 with features:
-
-    # d1 = st.date_input("Define the start date for crawling.")
-    # start_date = st.write('Start date:', d1)
-    start_date = st.text_input("Start date input: ")
-    end_date = st.text_input("End date input: ")
-
-    # d2 = st.date_input("Define the end date for crawling.")
-    # end_date = st.write('End date:', d2)
     
-    keyword_1 = st.text_input("Please input the name of gpu card: (ex: 6900 xt)")
-    keyword_2 = st.text_input("Please input the name of gpu card: (ex 6900xt)")
+    load = st.button('Load Data')
     
+    # initialize session state
+    if "load_state" not in st.session_state:
+        st.session_state.load_state = False
+        
+    if load or st.session_state.load_state:
+        st.session_state.load_state = True
+        
+        # d1 = st.date_input("Define the start date for crawling.")
+        # start_date = st.write('Start date:', d1)
+        start_date = st.text_input("Start date input: ")
+        end_date = st.text_input("End date input: ")
     
+        # d2 = st.date_input("Define the end date for crawling.")
+        # end_date = st.write('End date:', d2)
+        
+        keyword_1 = st.text_input("Please input the name of gpu card: (ex: 6900 xt)")
+        keyword_2 = st.text_input("Please input the name of gpu card: (ex 6900xt)")
+        
     
 with model:
     
-    df = reddit_framework(str(keyword_1), str(keyword_2), str(start_date), str(end_date))
+    df = reddit_framework(keyword_1, keyword_2, start_date, end_date)
     
     # display the dataframe
     
