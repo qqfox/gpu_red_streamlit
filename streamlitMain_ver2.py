@@ -29,12 +29,6 @@ model = st.container()
 with header:
     st.header("PowerColor Web scraping Dashboard")
     st.text("This is a demo for scrawping the Reddit and Techpowerup websites.")
- 
-    # def handle_click(new_type):
-    #     st.session_state.type = new_type
-    # def handle_click_wo_button():
-    #     if st.session_state.kind_of_column:
-    #         st.session_state.type = st.session_state.kind_of_column
 
     st.session_state['type'] = st.radio("Choose the website to crawl data",['Reddit','Techpowerup'])
 
@@ -42,18 +36,21 @@ with header:
     if st.session_state['type'] == "Reddit":
 
         with st.form(key='my_form_to_submit'):
+            
     
-            # d1 = st.date_input("Define the start date for crawling.")
-            # start_date = st.write('Start date:', d1)
+            st.text('The format of date should be YYYY-MM-DD. For example: 2023-03-30')
+
             start_date = st.text_input("Start date input: ")
             end_date = st.text_input("End date input: ")
         
             # d2 = st.date_input("Define the end date for crawling.")
             # end_date = st.write('End date:', d2)
             
-            keyword_1 = st.text_input("Please input the name of gpu card: (ex: 6900 xt)")
+            st.text("Please input the name of gpu card.")
+            keyword_1 = st.text_input("For example: 6900 xt")
             keyword_2 = "".join(keyword_1.split())
-            
+
+            st.text("After fill in the information, please press submit button")
             submit_button = st.form_submit_button(label='Submit')
         
         if submit_button:
@@ -74,16 +71,17 @@ with header:
             
             
             with st.form(key='my_form_to_submit'):
-                st.text("This website does not have search function.")
-                st.text("Therefore, you need to fill in the links of forums you want to crawl, if more than two links, please separate by a comma , ")
-                st.text("For example: https://www.techpowerup.com/forums/forums/amd-ati-gpus.58/, https://www.techpowerup.com/forums/forums/overclocking-cooling.13/")
 
-                urls_lst =  st.text_input("Please input links of forum here ")
+                st.text("Please input the link of main forrum: ")
+                st.text("if more than two links, please separate by a comma ,")
+                urls_lst =  st.text_input("For example, the main forum 'Overclocking & Cooling' should input link:  https://www.techpowerup.com/forums/forums/overclocking-cooling.13/")
             
                 st.text("Please input the name of gpu card: ")
                 keyword_1 = st.text_input("For example: 6900 xt")                
                 
-                st.text("The data is crawled if it is last updated within 3 months. ")
+                st.text("The data is crawled if last updated within 3 months.")
+
+                st.text("After fill in the information, please press submit button")
                 submit_button = st.form_submit_button(label='Submit')
                 
             if submit_button:
