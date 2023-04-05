@@ -107,16 +107,16 @@ with header:
             
 
 
-            crawldata = []
+            # crawldata = []
             
-            for url in urls_lst:
+            # for url in urls_lst:
 
-                techp1 = techPowerup_main(str(url),keyword_1)
+            techp1 = techPowerup_main(url,keyword_1)
                 # techp2 = techPowerup_main(url,keyword_2)
-                crawldata.append(techp1)
+                # crawldata.append(techp1)
                 # crawldata.append(techp2)
             
-            fin_tech = pd.concat(crawldata,axis=0)
+            fin_tech = pd.concat(techp1,axis=0)
             
             st.write(fin_tech.head())
 
