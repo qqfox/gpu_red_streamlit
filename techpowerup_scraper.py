@@ -73,7 +73,7 @@ def techPowerup_main(url, kw):
             
             for item in tech_posts:
                 title =  item.a.string
-                if str(kw) in title:
+                if str(kw) or str("".join(kw.split())) in title:
         
                     url= 'https://www.techpowerup.com' + item.a['href']
                     r2 = s.get(url)
