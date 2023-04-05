@@ -88,7 +88,7 @@ with header:
             except:
                 print('There is somthing wrong with your query')
             # display the dataframe
-
+            
 # process for reddit
     if st.session_state['type'] == "Reddit":
 
