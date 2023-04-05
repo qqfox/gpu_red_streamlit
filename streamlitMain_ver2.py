@@ -111,7 +111,7 @@ with header:
             
             # for url in urls_lst:
 
-            techp1 = techPowerup_main(url,keyword_1)
+            techp1 = techPowerup_main(urls_lst,keyword_1)
                 # techp2 = techPowerup_main(url,keyword_2)
                 # crawldata.append(techp1)
                 # crawldata.append(techp2)
