@@ -94,7 +94,7 @@ with header:
         
             st.text("Please input the name of gpu card: ")
             keyword_1 = st.text_input("For example: 6900 xt")  
-            keyword_2 = "".join(keyword_1.split())              
+            # keyword_2 = "".join(keyword_1.split())              
               
             
             st.text("The data is crawled if last updated within 3 months.")
@@ -110,9 +110,9 @@ with header:
             
             for url in urls_lst:
                 techp1 = techPowerup_main(url,keyword_1)
-                techp2 = techPowerup_main(url,keyword_2)
+                # techp2 = techPowerup_main(url,keyword_2)
                 crawldata.append(techp1)
-                crawldata.append(techp2)
+                # crawldata.append(techp2)
             
             fin_tech = pd.concat(crawldata,axis=0)
             
