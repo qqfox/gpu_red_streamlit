@@ -105,30 +105,29 @@ with header:
             
         # if submit_buttonn:
             
-        try:
-            crawldata = []
-            
-            for url in urls_lst:
-                techp1 = techPowerup_main(url,keyword_1)
-                techp2 = techPowerup_main(url,keyword_2)
-                crawldata.append(techp1)
-                crawldata.append(techp2)
-            
-            fin_tech = pd.concat(crawldata,axis=0)
-            
-            st.write(fin_tech.head())
 
-            st.text("If the table is blank, there is no data in the time you request or something went wrong with the input")
+        crawldata = []
+        
+        for url in urls_lst:
+            techp1 = techPowerup_main(url,keyword_1)
+            techp2 = techPowerup_main(url,keyword_2)
+            crawldata.append(techp1)
+            crawldata.append(techp2)
+        
+        fin_tech = pd.concat(crawldata,axis=0)
+        
+        st.write(fin_tech.head())
 
-            st.text("Please press Download data button to save csv file to you computer")
+        st.text("If the table is blank, there is no data in the time you request or something went wrong with the input")
 
-            st.download_button(label = "Download Data", data = fin_tech.to_csv(),
-                                file_name = "Techpowerup_dataset.csv",
-                                mime='text/csv')
+        st.text("Please press Download data button to save csv file to you computer")
+
+        st.download_button(label = "Download Data", data = fin_tech.to_csv(),
+                            file_name = "Techpowerup_dataset.csv",
+                            mime='text/csv')
     
         
-        except:
-            print('There is somthing wrong with your query')
+
         # display the dataframe
                 
     else:
