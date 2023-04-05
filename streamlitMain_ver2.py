@@ -40,48 +40,47 @@ with header:
     # st.session_state['type'] = st.radio("Choose the website to crawl data",['Reddit','Techpowerup'], on_change = handle_click_wo_button, key = 'kind_of_column')
     type_of_column = st.radio("Choose the website to crawl data",['Reddit','Techpowerup'], on_change = handle_click_wo_button, key = 'kind_of_column')
 
-# process for reddit
-    if st.session_state['type'] == "Reddit":
+# # process for reddit
+#     if st.session_state['type'] == "Reddit":
 
-        with st.form(key='my_form_to_submit'):
+#         with st.form(key='my_form_to_submit'):
             
-    
-            st.text('The format of date should be YYYY-MM-DD. For example: 2023-03-30')
+#             st.text('The format of date should be YYYY-MM-DD. For example: 2023-03-30')
 
-            start_date = st.text_input("Start date input: ")
-            end_date = st.text_input("End date input: ")
+#             start_date = st.text_input("Start date input: ")
+#             end_date = st.text_input("End date input: ")
         
-            # d2 = st.date_input("Define the end date for crawling.")
-            # end_date = st.write('End date:', d2)
+#             # d2 = st.date_input("Define the end date for crawling.")
+#             # end_date = st.write('End date:', d2)
             
-            st.text("Please input the name of gpu card.")
-            keyword_1 = st.text_input("For example: 6900 xt")
-            keyword_2 = "".join(keyword_1.split())
+#             st.text("Please input the name of gpu card.")
+#             keyword_1 = st.text_input("For example: 6900 xt")
+#             keyword_2 = "".join(keyword_1.split())
 
-            st.text("After fill in the information, please press submit button")
-            st.text("Then the running man at the top right corner will do excersise until finishs RUNNING.")
+#             st.text("After fill in the information, please press submit button")
+#             st.text("Then the running man at the top right corner will do excersise until finishs RUNNING.")
 
-            submit_button = st.form_submit_button(label='Submit Reddit')
+#             submit_button = st.form_submit_button(label='Submit Reddit')
         
-        if submit_button:
-            try:
-                df = reddit_framework(keyword_1, keyword_2, start_date, end_date)
+#         if submit_button:
+#             try:
+#                 df = reddit_framework(keyword_1, keyword_2, start_date, end_date)
                 
-                # display the dataframe
+#                 # display the dataframe
                 
-                st.write(df.head())
+#                 st.write(df.head())
 
-                st.text("If the table is blank, there is no data in the time you request or something went wrong with the input")
+#                 st.text("If the table is blank, there is no data in the time you request or something went wrong with the input")
 
-                st.text("Esle, please press Download data button to save csv file to you computer")
+#                 st.text("Esle, please press Download data button to save csv file to you computer")
                 
-                st.download_button(label = "Download Reddit", data = df.to_csv(),
-                                    file_name = "Reddit_dataset.csv",
-                                    mime='text/csv')
-            except:
-                print('There is somthing wrong with your query')
-# process for Techpowerup    
-    elif st.session_state['type'] == 'Techpowerup':
+#                 st.download_button(label = "Download Reddit", data = df.to_csv(),
+#                                     file_name = "Reddit_dataset.csv",
+#                                     mime='text/csv')
+#             except:
+#                 print('There is somthing wrong with your query')
+# # process for Techpowerup    
+    if st.session_state['type'] == 'Techpowerup':
         
         with st.form(key='my_form_to_submit'):
 
