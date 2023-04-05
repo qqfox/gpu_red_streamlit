@@ -61,7 +61,7 @@ with header:
             st.text("After fill in the information, please press submit button")
             st.text("Then the running man at the top right corner will do excersise until finishs RUNNING.")
 
-            submit_button = st.form_submit_button(label='Submit')
+            submit_button = st.form_submit_button(label='Submit Reddit')
         
         if submit_button:
             try:
@@ -75,7 +75,7 @@ with header:
 
                 st.text("Esle, please press Download data button to save csv file to you computer")
                 
-                st.download_button(label = "Download Data", data = df.to_csv(),
+                st.download_button(label = "Download Reddit", data = df.to_csv(),
                                     file_name = "Reddit_dataset.csv",
                                     mime='text/csv')
             except:
@@ -98,7 +98,7 @@ with header:
             st.text("After fill in the information, please press submit button")
             st.text("Then the running man at the top right corner will do excersise until finishs RUNNING.")
             
-            submit_button = st.form_submit_button(label='Submit')
+            submit_button = st.form_submit_button(label='Submit Techpowerup')
             
         if submit_button:
             
@@ -121,7 +121,7 @@ with header:
 
                 st.text("Please press Download data button to save csv file to you computer")
 
-                st.download_button(label = "Download Data", data = fin_tech.to_csv(),
+                st.download_button(label = "Download Techpowerup data", data = fin_tech.to_csv(),
                                     file_name = "Techpowerup_dataset.csv",
                                     mime='text/csv')
         
