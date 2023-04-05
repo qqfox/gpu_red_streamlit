@@ -89,7 +89,7 @@ with header:
         with st.form(key='my_form_to_submit'):
 
             st.text("Please input the link of main forrum: ")
-            st.text("if more than two links, please separate by a comma ,")
+            # st.text("if more than two links, please separate by a comma ,")
             urls_lst =  st.text_input("For example, the main forum 'Overclocking & Cooling' should input link:  https://www.techpowerup.com/forums/forums/overclocking-cooling.13/")
         
             st.text("Please input the name of gpu card: ")
@@ -104,6 +104,8 @@ with header:
             submit_button = st.form_submit_button(label='Submit')
             
         if submit_button:
+
+            # currently not able to run over multiple links
             
 
 
