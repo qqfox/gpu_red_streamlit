@@ -116,15 +116,15 @@ with header:
                 # crawldata.append(techp1)
                 # crawldata.append(techp2)
             
-            fin_tech = pd.concat(techp1,axis=0)
+            # fin_tech = pd.concat(techp1,axis=0)
             
-            st.write(fin_tech.head())
+            st.write(techp1.head())
 
             st.text("If the table is blank, there is no data in the time you request or something went wrong with the input")
 
             st.text("Please press Download data button to save csv file to you computer")
 
-            st.download_button(label = "Download Data", data = fin_tech.to_csv(),
+            st.download_button(label = "Download Data", data = techp1.to_csv(),
                                 file_name = "Techpowerup_dataset.csv",
                                 mime='text/csv')
         
