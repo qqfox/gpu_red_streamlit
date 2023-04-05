@@ -33,12 +33,15 @@ with header:
     def handle_click(new_type):
         st.session_state.type = new_type
 
-    def handle_click_wo_button():
-        if st.session_state.kind_of_column:
-            st.session_state.type = st.session_state.kind_of_column
+    # def handle_click_wo_button():
+    #     if st.session_state.kind_of_column:
+    #         st.session_state.type = st.session_state.kind_of_column
 
-    # st.session_state['type'] = st.radio("Choose the website to crawl data",['Reddit','Techpowerup'], on_change = handle_click_wo_button, key = 'kind_of_column')
-    type_of_column = st.radio("Choose the website to crawl data",['Reddit','Techpowerup'], on_change = handle_click_wo_button, key = 'kind_of_column')
+    # st.session_state['type'] = st.radio("Choose the website to crawl data",['Reddit','Techpowerup'])
+    type_of_colum = st.radio("Choose the website to crawl data",['Reddit','Techpowerup'])
+    change = st.button('Change', on_click = handle_click, arg = [type_of_colum] )
+    # type_of_column = st.radio("Choose the website to crawl data",['Reddit','Techpowerup'], on_change = handle_click_wo_button, key = 'kind_of_column')
+
 
 # process for reddit
     if st.session_state['type'] == "Reddit":
@@ -50,9 +53,7 @@ with header:
 
             start_date = st.text_input("Start date input: ")
             end_date = st.text_input("End date input: ")
-        
-            # d2 = st.date_input("Define the end date for crawling.")
-            # end_date = st.write('End date:', d2)
+
             
             st.text("Please input the name of gpu card.")
             keyword_1 = st.text_input("For example: 6900 xt")
