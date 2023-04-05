@@ -30,16 +30,16 @@ with header:
     st.header("PowerColor Web scraping Dashboard")
     st.text("This is a demo for scrawping the Reddit and Techpowerup websites.")
 
-    def handle_click(new_type):
-        st.session_state.type = new_type
+    # def handle_click(new_type):
+    #     st.session_state.type = new_type
 
     # def handle_click_wo_button():
     #     if st.session_state.kind_of_column:
     #         st.session_state.type = st.session_state.kind_of_column
 
-    # st.session_state['type'] = st.radio("Choose the website to crawl data",['Reddit','Techpowerup'])
-    type_of_colum = st.radio("Choose the website to crawl data",['Reddit','Techpowerup'])
-    change = st.button('Change', on_click = handle_click, arg = [type_of_colum] )
+    st.session_state['type'] = st.radio("Choose the website to crawl data",['Reddit','Techpowerup'])
+    # type_of_colum = st.radio("Choose the website to crawl data",['Reddit','Techpowerup'])
+    # change = st.button('Change', on_click = handle_click, arg = [type_of_colum] )
     # type_of_column = st.radio("Choose the website to crawl data",['Reddit','Techpowerup'], on_change = handle_click_wo_button, key = 'kind_of_column')
 
 
@@ -81,6 +81,8 @@ with header:
                                     mime='text/csv')
             except:
                 print('There is somthing wrong with your query')
+
+
 # process for Techpowerup    
     elif st.session_state['type'] == 'Techpowerup':
         
@@ -129,7 +131,8 @@ with header:
                 print('There is somthing wrong with your query')
             # display the dataframe
                 
-
+    else:
+        print('Opps')
     
     
     
