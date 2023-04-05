@@ -105,8 +105,8 @@ with header:
             
         if submit_button:
             
-            print(urls_lst)
-            print(keyword_1)
+            st.write(urls_lst)
+            st.write(keyword_1)
 
             # crawldata = []
             
