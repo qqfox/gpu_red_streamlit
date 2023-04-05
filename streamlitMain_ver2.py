@@ -29,13 +29,14 @@ model = st.container()
 with header:
     st.header("PowerColor Web scraping Dashboard")
     st.text("This is a demo for scrawping the Reddit and Techpowerup websites.")
+ 
+    # def handle_click(new_type):
+    #     st.session_state.type = new_type
+    # def handle_click_wo_button():
+    #     if st.session_state.kind_of_column:
+    #         st.session_state.type = st.session_state.kind_of_column
 
-    def handle_click(new_type):
-        st.session_state.type = new_type
-    def handle_click_wo_button():
-        if st.session_state.kind_of_column:
-            st.session_state.type = st.session_state.kind_of_column
-    type_of_column = st.radio("Choose the website to crawl data",['Reddit','Techpowerup'])
+    st.session_state['type'] = st.radio("Choose the website to crawl data",['Reddit','Techpowerup'])
 
 # process for reddit
     if st.session_state['type'] == "Reddit":
