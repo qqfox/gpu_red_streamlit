@@ -34,11 +34,60 @@ with header:
         st.session_state.type = new_type
 
     def handle_click_wo_button():
-        if st.session_state.kind_of_column:
-            st.session_state.type = st.session_state.kind_of_column
+        if st.session_state.type_of_column:
+            st.session_state.type = st.session_state.type_of_column
 
     # st.session_state['type'] = st.radio("Choose the website to crawl data",['Reddit','Techpowerup'], on_change = handle_click_wo_button, key = 'kind_of_column')
     type_of_column = st.radio("Choose the website to crawl data",['Reddit','Techpowerup'], on_change = handle_click_wo_button, key = 'kind_of_column')
+    
+    if st.session_state['type'] == 'Techpowerup':
+        
+        with st.form(key='my_form_to_submit'):
+
+            st.text("Please input the link of main forrum: ")
+            st.text("if more than two links, please separate by a comma ,")
+            urls_lst =  st.text_input("For example, the main forum 'Overclocking & Cooling' should input link:  https://www.techpowerup.com/forums/forums/overclocking-cooling.13/")
+        
+            st.text("Please input the name of gpu card: ")
+            keyword_1 = st.text_input("For example: 6900 xt")  
+            keyword_2 = "".join(keyword_1.split())              
+              
+            
+            st.text("The data is crawled if last updated within 3 months.")
+            st.text("After fill in the information, please press submit button")
+            st.text("Then the running man at the top right corner will do excersise until finishs RUNNING.")
+            
+            submit_button = st.form_submit_button(label='Submit')
+            
+        if submit_button:
+            
+            try:
+                crawldata = []
+                
+                for url in urls_lst:
+                    techp1 = techPowerup_main(url,keyword_1)
+                    techp2 = techPowerup_main(url,keyword_2)
+                    crawldata.append(techp1)
+                    crawldata.append(techp2)
+                
+                fin_tech = pd.concat(crawldata,axis=0)
+
+                fin = fin_tech.drop_duplicates(subset=['Title','Post body','Date of Post','Comments','Links'],keep="first")
+                
+                st.write(fin.head())
+
+                st.text("If the table is blank, there is no data in the time you request or something went wrong with the input")
+
+                st.text("Please press Download data button to save csv file to you computer")
+
+                st.download_button(label = "Download Data", data = fin.to_csv(),
+                                    file_name = "Techpowerup_dataset.csv",
+                                    mime='text/csv')
+        
+            
+            except:
+                print('There is somthing wrong with your query')
+            # display the dataframe
 
 # process for reddit
     if st.session_state['type'] == "Reddit":
@@ -112,14 +161,16 @@ with header:
                     crawldata.append(techp2)
                 
                 fin_tech = pd.concat(crawldata,axis=0)
+
+                fin = fin_tech.drop_duplicates(subset=['Title','Post body','Date of Post','Comments','Links'],keep="first")
                 
-                st.write(fin_tech.head())
+                st.write(fin.head())
 
                 st.text("If the table is blank, there is no data in the time you request or something went wrong with the input")
 
                 st.text("Please press Download data button to save csv file to you computer")
 
-                st.download_button(label = "Download Data", data = fin_tech.to_csv(),
+                st.download_button(label = "Download Data", data = fin.to_csv(),
                                     file_name = "Techpowerup_dataset.csv",
                                     mime='text/csv')
         
