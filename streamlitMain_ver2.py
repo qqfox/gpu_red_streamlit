@@ -86,49 +86,47 @@ with header:
 # process for Techpowerup    
     elif st.session_state['type'] == 'Techpowerup':
         
-        # with st.form(key='my_form_to_submit'):
+        with st.form(key='my_form_to_submit'):
 
-        st.text("Please input the link of main forrum: ")
-        st.text("if more than two links, please separate by a comma ,")
-        urls_lst =  st.text_input("For example, the main forum 'Overclocking & Cooling' should input link:  https://www.techpowerup.com/forums/forums/overclocking-cooling.13/")
-    
-        st.text("Please input the name of gpu card: ")
-        keyword_1 = st.text_input("For example: 6900 xt")  
-        keyword_2 = "".join(keyword_1.split())              
+            st.text("Please input the link of main forrum: ")
+            st.text("if more than two links, please separate by a comma ,")
+            urls_lst =  st.text_input("For example, the main forum 'Overclocking & Cooling' should input link:  https://www.techpowerup.com/forums/forums/overclocking-cooling.13/")
+        
+            st.text("Please input the name of gpu card: ")
+            keyword_1 = st.text_input("For example: 6900 xt")  
+            keyword_2 = "".join(keyword_1.split())              
+              
             
-        
-        st.text("The data is crawled if last updated within 3 months.")
-        st.text("After fill in the information, please press submit button")
-        st.text("Then the running man at the top right corner will do excersise until finishs RUNNING.")
+            st.text("The data is crawled if last updated within 3 months.")
+            st.text("After fill in the information, please press submit button")
+            st.text("Then the running man at the top right corner will do excersise until finishs RUNNING.")
             
-            # submit_buttonn = st.form_submit_button(label='Submit')
+            submit_button = st.form_submit_button(label='Submit')
             
-        # if submit_buttonn:
+        if submit_button:
             
 
-        crawldata = []
-        
-        for url in urls_lst:
-            techp1 = techPowerup_main(url,keyword_1)
-            techp2 = techPowerup_main(url,keyword_2)
-            crawldata.append(techp1)
-            crawldata.append(techp2)
-        
-        fin_tech = pd.concat(crawldata,axis=0)
-        
-        st.write(fin_tech.head())
+            crawldata = []
+            
+            for url in urls_lst:
+                techp1 = techPowerup_main(url,keyword_1)
+                techp2 = techPowerup_main(url,keyword_2)
+                crawldata.append(techp1)
+                crawldata.append(techp2)
+            
+            fin_tech = pd.concat(crawldata,axis=0)
+            
+            st.write(fin_tech.head())
 
-        st.text("If the table is blank, there is no data in the time you request or something went wrong with the input")
+            st.text("If the table is blank, there is no data in the time you request or something went wrong with the input")
 
-        st.text("Please press Download data button to save csv file to you computer")
+            st.text("Please press Download data button to save csv file to you computer")
 
-        st.download_button(label = "Download Data", data = fin_tech.to_csv(),
-                            file_name = "Techpowerup_dataset.csv",
-                            mime='text/csv')
-    
+            st.download_button(label = "Download Data", data = fin_tech.to_csv(),
+                                file_name = "Techpowerup_dataset.csv",
+                                mime='text/csv')
         
-
-        # display the dataframe
+            # display the dataframe
                 
     else:
         print('Opps')
