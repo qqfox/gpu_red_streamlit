@@ -73,7 +73,7 @@ with header:
             except:
                 print('There is somthing wrong with your query')
 # process for Techpowerup    
-    if st.session_state['type'] == 'Techpowerup':
+    elif st.session_state['type'] == 'Techpowerup':
         
         with st.form(key='my_form_to_submit'):
 
@@ -82,10 +82,11 @@ with header:
             urls_lst =  st.text_input("For example, the main forum 'Overclocking & Cooling' should input link:  https://www.techpowerup.com/forums/forums/overclocking-cooling.13/")
         
             st.text("Please input the name of gpu card: ")
-            keyword_1 = st.text_input("For example: 6900 xt")                
+            keyword_1 = st.text_input("For example: 6900 xt")  
+            keyword_2 = "".join(keyword_1.split())              
+              
             
             st.text("The data is crawled if last updated within 3 months.")
-
             st.text("After fill in the information, please press submit button")
             st.text("Then the running man at the top right corner will do excersise until finishs RUNNING.")
             
@@ -97,9 +98,10 @@ with header:
                 crawldata = []
                 
                 for url in urls_lst:
-                    techp = techPowerup_main(url,keyword_1)
-                    crawldata.append(techp)
-                
+                    techp1 = techPowerup_main(url,keyword_1)
+                    techp2 = techPowerup_main(url,keyword_2)
+                    crawldata.append(techp1)
+                    crawldata.append(techp2)
                 
                 fin_tech = pd.concat(crawldata,axis=0)
                 
@@ -118,7 +120,8 @@ with header:
                 print('There is somthing wrong with your query')
             # display the dataframe
                 
-
+    else:
+        print("Opps")
     
 
     
