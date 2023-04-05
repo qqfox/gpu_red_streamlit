@@ -34,8 +34,8 @@ with header:
         st.session_state.type = new_type
 
     def handle_click_wo_button():
-        if st.session_state.type_of_column:
-            st.session_state.type = st.session_state.type_of_column
+        if st.session_state.kind_of_column:
+            st.session_state.type = st.session_state.kind_of_column
 
     # st.session_state['type'] = st.radio("Choose the website to crawl data",['Reddit','Techpowerup'], on_change = handle_click_wo_button, key = 'kind_of_column')
     type_of_column = st.radio("Choose the website to crawl data",['Reddit','Techpowerup'], on_change = handle_click_wo_button, key = 'kind_of_column')
