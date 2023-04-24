@@ -31,15 +31,25 @@ with header:
     st.header("PowerColor Web scraping Dashboard")
     st.text("This is a demo for scrawping the Reddit and Techpowerup websites.")
 
-    def handle_click(new_type):
-        st.session_state.type = new_type
-    def handle_click_wo_button():
-        if st.session_state.kind_of_column:
-            st.session_state.type = st.session_state.kind_of_column
-    type_of_column = st.radio("Choose the website to crawl data",['Reddit','Techpowerup','Tomhardware'])
+    # def handle_click(new_type):
+    #     st.session_state.type = new_type
+    # def handle_click_wo_button():
+    #     if st.session_state.kind_of_column:
+    #         st.session_state.type = st.session_state.kind_of_column
+    # type_of_column = st.radio("Choose the website to crawl data",['Reddit','Techpowerup','Tomhardware'])
+    
+    st.session_state.name = st.session_state.get('Reddit')
+    st.session_state.phone = st.session_state.get('Techpowerup')
+    st.session_state.phone = st.session_state.get('Tomhardware')
+    with st.sidebar:
+        radio = st.radio(
+        "Please select",
+        ('Reddit', 'Phone','Tomhardware'))
+        
 
 # process for reddit
-    if st.session_state['type'] == "Reddit":
+    # if st.session_state['type'] == "Reddit":
+    if radio == "Reddit":
 
         with st.form(key='my_form_to_submit'):
     
@@ -70,7 +80,9 @@ with header:
             except:
                 print('There is somthing wrong with your query')
 # process for Techpowerup    
-    elif st.session_state['type'] == 'Techpowerup':
+    # if st.session_state['type'] == 'Techpowerup':
+        if radio == "Techpowerup":
+
             
             
             with st.form(key='my_form_to_submit'):
@@ -109,49 +121,50 @@ with header:
                     print('There is somthing wrong with your query')
                 # display the dataframe
                 
-# # Process for Tomhardware
+# Process for Tomhardware
     
-#     elif st.session_state['type'] == 'Tomhardware':
+    # elif st.session_state['type'] == 'Tomhardware':
+    if radio == 'Tomhardware':
 
         
-#         with st.form(key='my_form_to_submit'):
+        with st.form(key='my_form_to_submit'):
 
 
-#             st.text("Key in the date and search keywords.")
+            st.text("Key in the date and search keywords.")
 
-#             st.text("Please input the search keyword here: ")
-#             keyword = st.text_input("For example: 6900 xt")      
-#             start_date = st.text_input("Newer than date: ")
-#             submit_button = st.form_submit_button(label='Submit')
+            st.text("Please input the search keyword here: ")
+            keyword = st.text_input("For example: 6900 xt")      
+            start_date = st.text_input("Newer than date: ")
+            submit_button = st.form_submit_button(label='Submit')
             
-#         if submit_button:
-#             with st.echo():
-#                 from selenium import webdriver
-#                 from selenium.webdriver.chrome.options import Options
-#                 from selenium.webdriver.chrome.service import Service
-#                 from webdriver_manager.chrome import ChromeDriverManager
+        if submit_button:
+            with st.echo():
+                from selenium import webdriver
+                from selenium.webdriver.chrome.options import Options
+                from selenium.webdriver.chrome.service import Service
+                from webdriver_manager.chrome import ChromeDriverManager
 
-#                 @st.experimental_singleton
-#                 def get_driver():
-#                     return webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+                @st.experimental_singleton
+                def get_driver():
+                    return webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
-#                 options = Options()
-#                 options.add_argument('--disable-gpu')
-#                 options.add_argument('--headless')
+                options = Options()
+                options.add_argument('--disable-gpu')
+                options.add_argument('--headless')
 
-#                 driver = get_driver()
-#                 try:
-#                     df = tomehardware(keyword,start_date,driver=driver)
+                driver = get_driver()
+                try:
+                    df = tomehardware(keyword,start_date,driver=driver)
                     
-#                     # display the dataframe
+                    # display the dataframe
                     
-#                     st.write(df.head())
+                    st.write(df.head())
                     
-#                     st.download_button(label = "Download Data", data = df.to_csv(),
-#                                         file_name = "Tomhardware_dataset.csv",
-#                                         mime='text/csv')
-#                 except:
-#                     print('There is somthing wrong with your query')
+                    st.download_button(label = "Download Data", data = df.to_csv(),
+                                        file_name = "Tomhardware_dataset.csv",
+                                        mime='text/csv')
+                except:
+                    print('There is somthing wrong with your query')
         
 
 
