@@ -140,8 +140,6 @@ with header:
                 options.add_argument('--headless')
 
                 driver = get_driver()
-                # driver.get("http://example.com")
-                # st.code(driver.page_source)
                 try:
                     df = tomehardware(keyword,start_date,driver=driver)
                     
