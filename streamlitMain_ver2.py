@@ -81,45 +81,45 @@ with header:
                 print('There is somthing wrong with your query')
 # process for Techpowerup    
     # if st.session_state['type'] == 'Techpowerup':
-        if radio == "Techpowerup":
+    if radio == "Techpowerup":
 
             
             
-            with st.form(key='my_form_to_submit'):
-                st.text("This website does not have search function.")
-                st.text("Therefore, you need to fill in the links of forums you want to crawl, if more than two links, please separate by a comma , ")
-                st.text("For example: https://www.techpowerup.com/forums/forums/amd-ati-gpus.58/, https://www.techpowerup.com/forums/forums/overclocking-cooling.13/")
+        with st.form(key='my_form_to_submit'):
+            st.text("This website does not have search function.")
+            st.text("Therefore, you need to fill in the links of forums you want to crawl, if more than two links, please separate by a comma , ")
+            st.text("For example: https://www.techpowerup.com/forums/forums/amd-ati-gpus.58/, https://www.techpowerup.com/forums/forums/overclocking-cooling.13/")
 
-                urls_lst =  st.text_input("Please input links of forum here ")
+            urls_lst =  st.text_input("Please input links of forum here ")
+        
+            st.text("Please input the name of gpu card: ")
+            keyword_1 = st.text_input("For example: 6900 xt")                
             
-                st.text("Please input the name of gpu card: ")
-                keyword_1 = st.text_input("For example: 6900 xt")                
-                
-                st.text("The data is crawled if it is last updated within 3 months. ")
-                submit_button = st.form_submit_button(label='Submit')
-                
-            if submit_button:
-                
-                try:
-                    crawldata = []
-                    
-                    for url in urls_lst:
-                        techp = techPowerup_main(url,keyword_1)
-                        crawldata.append(techp)
-                    
-                    
-                    fin_tech = pd.concat(crawldata,axis=0)
-                    
-                    st.write(fin_tech.head())
-                    
-                    st.download_button(label = "Download Data", data = fin_tech.to_csv(),
-                                        file_name = "Techpowerup_dataset.csv",
-                                        mime='text/csv')
+            st.text("The data is crawled if it is last updated within 3 months. ")
+            submit_button = st.form_submit_button(label='Submit')
             
+        if submit_button:
+            
+            try:
+                crawldata = []
                 
-                except:
-                    print('There is somthing wrong with your query')
-                # display the dataframe
+                for url in urls_lst:
+                    techp = techPowerup_main(url,keyword_1)
+                    crawldata.append(techp)
+                
+                
+                fin_tech = pd.concat(crawldata,axis=0)
+                
+                st.write(fin_tech.head())
+                
+                st.download_button(label = "Download Data", data = fin_tech.to_csv(),
+                                    file_name = "Techpowerup_dataset.csv",
+                                    mime='text/csv')
+        
+            
+            except:
+                print('There is somthing wrong with your query')
+            # display the dataframe
                 
 # Process for Tomhardware
     
