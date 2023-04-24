@@ -112,7 +112,11 @@ with header:
 # Process for Tomhardware
     
     elif st.session_state['type'] == 'Tomhardware':
+
+        
         with st.form(key='my_form_to_submit'):
+
+
             st.text("Key in the date and search keywords.")
 
             st.text("Please input the search keyword here: ")
@@ -121,18 +125,35 @@ with header:
             submit_button = st.form_submit_button(label='Submit')
             
         if submit_button:
-            try:
-                df = tomehardware(keyword,start_date )
-                
-                # display the dataframe
-                
-                st.write(df.head())
-                
-                st.download_button(label = "Download Data", data = df.to_csv(),
-                                    file_name = "Tomhardware_dataset.csv",
-                                    mime='text/csv')
-            except:
-                print('There is somthing wrong with your query')
+            with st.echo():
+                from selenium import webdriver
+                from selenium.webdriver.chrome.options import Options
+                from selenium.webdriver.chrome.service import Service
+                from webdriver_manager.chrome import ChromeDriverManager
+
+                @st.experimental_singleton
+                def get_driver():
+                    return webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+
+                options = Options()
+                options.add_argument('--disable-gpu')
+                options.add_argument('--headless')
+
+                driver = get_driver()
+                # driver.get("http://example.com")
+                # st.code(driver.page_source)
+                try:
+                    df = tomehardware(keyword,start_date,driver=driver)
+                    
+                    # display the dataframe
+                    
+                    st.write(df.head())
+                    
+                    st.download_button(label = "Download Data", data = df.to_csv(),
+                                        file_name = "Tomhardware_dataset.csv",
+                                        mime='text/csv')
+                except:
+                    print('There is somthing wrong with your query')
         
 
 

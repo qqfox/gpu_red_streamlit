@@ -15,12 +15,12 @@ import numpy as np
 from selenium import webdriver
 from datetime import datetime, timedelta
 from selenium.webdriver.common.by import By
-path = 'C:\chromedriver.exe'
-driver = webdriver.Chrome(path)
+# path = 'C:\chromedriver.exe'
+# driver = webdriver.Chrome(path)
 # fillin and search
 
-def tomehardware(kw1, date):
-    
+def tomehardware(kw1, date,driver):
+        
     url = 'https://forums.tomshardware.com/search/'
     driver.get(url)
     kw2 = "".join(kw1.split())
