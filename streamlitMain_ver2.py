@@ -44,7 +44,7 @@ with header:
     with st.sidebar:
         radio = st.radio(
         "Please select",
-        ('Reddit', 'Phone','Tomhardware'))
+        ('Reddit', 'Techpowerup','Tomhardware'))
         
 
 # process for reddit
