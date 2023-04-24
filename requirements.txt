@@ -8,4 +8,4 @@ requests_html==0.10.0
 selenium==4.9.0
 streamlit==1.16.0
 webdriver_manager==3.8.3
-seleniumbase==1.15.3
+seleniumbase
