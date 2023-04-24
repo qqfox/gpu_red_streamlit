@@ -18,13 +18,12 @@ from requests_html import HTMLSession
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from datetime import datetime, timedelta, date
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
 
 from reddit_scraper import reddit_framework
 from techpowerup_scraper import techPowerup_main
 from tomhardware_scraper import tomehardware
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.by import By
 
 # from selenium.webdriver.chrome.service import Service
 # from webdriver_manager.chrome import ChromeDriverManager
@@ -149,15 +148,11 @@ with header:
 
             # @st.experimental_singleton thay bang @st.experimental_singleton
             
-            options = webdriver.ChromeOptions()
-            options.headless = True
-            driver = webdriver.Chrome(options=options)
-            # def get_driver():
-            #     return webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
-            # options = Options()
-            # options.add_argument('--disable-gpu')
-            # options.add_argument('--headless')
-            # driver = get_driver()
+            # options = webdriver.ChromeOptions()
+            # options.headless = True
+            # driver = webdriver.Chrome(options=options)
+            path = "https://raw.githubusercontent.com/qqfox/gpu_red_streamlit/chromedriver.exe"
+            driver = webdriver.Chrome(path)
             
             try:
                 df = tomehardware(keyword,start_date,driver=driver)
