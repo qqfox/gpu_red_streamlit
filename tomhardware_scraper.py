@@ -14,7 +14,9 @@ import time
 import numpy as np
 from selenium import webdriver
 from datetime import datetime, timedelta
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
+
 # path = 'C:\chromedriver.exe'
 # driver = webdriver.Chrome(path)
 # fillin and search
