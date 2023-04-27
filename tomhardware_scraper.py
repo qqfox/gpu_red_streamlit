@@ -199,7 +199,7 @@ def tomehardware(kw1, date,driver):
                 print(f'Sleeping {round(alarm, 2)} seconds...')
                 time.sleep(round(alarm, rounding))
     
-    
+    driver.quit()
     crawlDataframe = pd.concat(crawlData,axis=0)
 
 
