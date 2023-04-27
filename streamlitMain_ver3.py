@@ -186,6 +186,7 @@ with header:
                 driver = get_driver()
                 url = 'https://forums.tomshardware.com/search/'
                 driver.get(url)
+                st.code(driver.page_source)
                 
                 kw2 = "".join(kw1.split())
 
@@ -208,7 +209,7 @@ with header:
                 
                 # submit
                 time_input1.submit()
-                st.code(driver.page_source)
+                
                 
                 
                 
