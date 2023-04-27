@@ -36,15 +36,17 @@ def tomehardware_url(kw1, date, driver):
     driver.implicitly_wait(10)
     kw_input1 = driver.find_element(By.XPATH,"(//input[@class='input'])[3]")
     # kw_input1.clear()
+    driver.implicitly_wait(10)
     kw_input1.send_keys(str(kw1+'OR'+kw2))  # Variable 
     
     # check box
+    driver.implicitly_wait(5)
     driver.find_element(By.XPATH, "(//input[@name='c[title_only]']/following-sibling::i)[5]").click()
     
     # time range
-    driver.implicitly_wait(10)
     time_input1 = driver.find_element(By.NAME,"c[newer_than]")
     # time_input1.clear()
+    driver.implicitly_wait(2)
     time_input1.send_keys(date)        # Variable 
     
     # submit
