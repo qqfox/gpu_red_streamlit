@@ -42,11 +42,11 @@ with header:
     st.session_state.phone = st.session_state.get('Techpowerup')
     st.session_state.phone = st.session_state.get('Amazon')
     st.session_state.phone = st.session_state.get('Minfactory')
-
+    st.session_state.phone = st.session_state.get('Tomhardware')
     with st.sidebar:
         radio = st.radio(
         "Please select",
-        ('Reddit', 'Techpowerup','Amazon','Minfactory'))
+        ('Reddit', 'Techpowerup','Amazon','Minfactory','Tomhardware'))
         
 
 # process for reddit
@@ -184,6 +184,49 @@ with header:
             except:
                 print('There is somthing wrong with your query')
 
+# Process for Tomhardware
     
+    if radio == 'Tomhardware':
+        
+        st.header("Tomhardware Web scraping Dashboard")
+        
+        with st.form(key='my_form_to_submit'):
+
+            st.text("Key in the date and search keywords.")
+
+            st.text("Please input the search keyword here: ")
+            keyword = st.text_input("For example: 6900 xt")      
+            start_date = st.text_input("Newer than date: ")
+            submit_button = st.form_submit_button(label='Submit')
+            
+        if submit_button:
+            
+            with st.echo():
+                from selenium import webdriver
+                from selenium.webdriver.chrome.options import Options
+                from selenium.webdriver.chrome.service import Service
+                from webdriver_manager.chrome import ChromeDriverManager
+
+                @st.experimental_singleton # thay bang @st.experimental_singleton
+                def get_driver():
+                    return webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+
+                options = Options()
+                options.add_argument('--disable-gpu')
+                options.add_argument('--headless')
+                driver = get_driver()
+                
+            try:
+                df = tomehardware(keyword,start_date,driver=driver)
+                
+                # display the dataframe
+                
+                st.write(df.head())
+                
+                st.download_button(label = "Download Data", data = df.to_csv(),
+                                    file_name = "Tomhardware_dataset.csv",
+                                    mime='text/csv')
+            except:
+                print('There is somthing wrong with your query')    
 
     
