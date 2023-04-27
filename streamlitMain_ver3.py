@@ -164,7 +164,7 @@ with header:
             st.text("Key in the date and search keywords.")
 
             st.text("Please input the search keyword here: ")
-            keyword = st.text_input("For example: 6700 xt")      
+            kw1 = st.text_input("For example: 6700 xt")      
             start_date = st.text_input("Newer than date: ")
             submit_button = st.form_submit_button(label='Submit')
             
@@ -184,14 +184,48 @@ with header:
                 options.add_argument('--headless')
 
                 driver = get_driver()
-                url_search = tomehardware_url(keyword,start_date, driver=driver)
-                df = tomehardware(url_search)
+                url = 'https://forums.tomshardware.com/search/'
+                driver.get(url)
+                
+                kw2 = "".join(kw1.split())
+
+                # input keywords search
+                driver.implicitly_wait(10)
+                kw_input1 = driver.find_element(By.XPATH,"(//input[@class='input'])[3]")
+                # kw_input1.clear()
+                driver.implicitly_wait(10)
+                kw_input1.send_keys(str(kw1+'OR'+kw2))  # Variable 
+                
+                # check box
+                driver.implicitly_wait(5)
+                driver.find_element(By.XPATH, "(//input[@name='c[title_only]']/following-sibling::i)[5]").click()
+                
+                # time range
+                time_input1 = driver.find_element(By.NAME,"c[newer_than]")
+                # time_input1.clear()
+                driver.implicitly_wait(2)
+                time_input1.send_keys(start_date)        # Variable 
+                
+                # submit
+                time_input1.submit()
+                st.code(driver.page_source)
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                # url_search = tomehardware_url(keyword,start_date, driver=driver)
+                # df = tomehardware(url_search)
                  
-                 # display the dataframe
-                st.write(df.head())
+                #  # display the dataframe
+                # st.write(df.head())
                  
-                st.download_button(label = "Download Data", data = df.to_csv(),
-                                     file_name = "Tomhardware_dataset.csv",
-                                     mime='text/csv')
+                # st.download_button(label = "Download Data", data = df.to_csv(),
+                #                      file_name = "Tomhardware_dataset.csv",
+                #                      mime='text/csv')
 
     
