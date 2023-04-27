@@ -26,7 +26,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 # driver = webdriver.Chrome(path)
 # fillin and search
 
-def tomehardware(kw1, date, driver):
+def tomehardware_url(kw1, date, driver):
 
     url = 'https://forums.tomshardware.com/search/'
     driver.get(url)
@@ -35,7 +35,7 @@ def tomehardware(kw1, date, driver):
     # input keywords search
     time.sleep(2)
     kw_input1 = driver.find_element(By.XPATH,"(//input[@class='input'])[3]")
-    kw_input1.clear()
+    # kw_input1.clear()
     kw_input1.send_keys(str(kw1+'OR'+kw2))  # Variable 
     
     # check box
@@ -44,7 +44,7 @@ def tomehardware(kw1, date, driver):
     # time range
     time.sleep(2)
     time_input1 = driver.find_element(By.NAME,"c[newer_than]")
-    time_input1.clear()
+    # time_input1.clear()
     time_input1.send_keys(date)        # Variable 
     
     # submit
@@ -64,9 +64,11 @@ def tomehardware(kw1, date, driver):
     print_output = buffer.getvalue()
     url_search = print_output[0:-1]
     # sys.stdout = sys.__stdout__
+    driver.quit()
     
+    return url_search
     
-    
+def tomehardware(url_search):
     """
     input: search result source page
     output: Dataframe
@@ -74,9 +76,7 @@ def tomehardware(kw1, date, driver):
     """
     ## Create list to pull random intervals from + counter
     
-    time_splits = np.linspace(6.129, 20.783, num=40)
-    counter = 0
-    
+
     headers  = {"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36"}
     # url_2 = url+'?last_days=90'
     
@@ -197,14 +197,8 @@ def tomehardware(kw1, date, driver):
                 
                 crawlData.append(df) # merge dataframe
                 
-                # prevent block by sleep randomly
-                counter += 1
-                alarm = np.random.choice(time_splits)
-                rounding = np.random.choice(list(range(2,6)))
-                print(f'Sleeping {round(alarm, 2)} seconds...')
-                time.sleep(round(alarm, rounding))
     
-    driver.quit()
+
     crawlDataframe = pd.concat(crawlData,axis=0)
 
 

@@ -25,7 +25,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 from reddit_scraper import reddit_framework
 from techpowerup_scraper import techPowerup_main
-from tomhardware_scraper import tomehardware
+from tomhardware_scraper import tomehardware, tomehardware_url
 from mindfactory_csraper import mindfactory
 
 # from selenium.webdriver.chrome.service import Service
@@ -184,7 +184,8 @@ with header:
                 options.add_argument('--headless')
 
                 driver = get_driver()
-                df = tomehardware(keyword,start_date, driver=driver)
+                url_search = tomehardware_url(keyword,start_date, driver=driver)
+                df = tomehardware(url_search)
                  
                  # display the dataframe
                 st.write(df.head())
