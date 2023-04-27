@@ -20,6 +20,8 @@ from selenium import webdriver
 from datetime import datetime, timedelta, date
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
 
 from reddit_scraper import reddit_framework
 from techpowerup_scraper import techPowerup_main
@@ -46,7 +48,7 @@ with header:
     with st.sidebar:
         radio = st.radio(
         "Please select",
-        ('Reddit', 'Techpowerup','Amazon','Minfactory','Tomhardware'))
+        ('Reddit', 'Techpowerup','Amazon','Mindfactory','Tomhardware'))
         
 
 # process for reddit
@@ -201,20 +203,17 @@ with header:
             
         if submit_button:
             
-            with st.echo():
-                from selenium import webdriver
-                from selenium.webdriver.chrome.options import Options
-                from selenium.webdriver.chrome.service import Service
-                from webdriver_manager.chrome import ChromeDriverManager
+        # with st.echo():
 
-                @st.experimental_singleton # thay bang @st.experimental_singleton
-                def get_driver():
-                    return webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
-                options = Options()
-                options.add_argument('--disable-gpu')
-                options.add_argument('--headless')
-                driver = get_driver()
+            # @st.experimental_singleton # thay bang @st.experimental_singleton
+            def get_driver():
+                return webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+
+            options = Options()
+            options.add_argument('--disable-gpu')
+            options.add_argument('--headless')
+            driver = get_driver()
                 
             try:
                 df = tomehardware(keyword,start_date,driver=driver)
