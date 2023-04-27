@@ -33,7 +33,7 @@ def tomehardware_url(kw1, date, driver):
     kw2 = "".join(kw1.split())
 
     # input keywords search
-    time.sleep(2)
+    driver.implicitly_wait(10)
     kw_input1 = driver.find_element(By.XPATH,"(//input[@class='input'])[3]")
     # kw_input1.clear()
     kw_input1.send_keys(str(kw1+'OR'+kw2))  # Variable 
@@ -42,7 +42,7 @@ def tomehardware_url(kw1, date, driver):
     driver.find_element(By.XPATH, "(//input[@name='c[title_only]']/following-sibling::i)[5]").click()
     
     # time range
-    time.sleep(2)
+    driver.implicitly_wait(10)
     time_input1 = driver.find_element(By.NAME,"c[newer_than]")
     # time_input1.clear()
     time_input1.send_keys(date)        # Variable 
@@ -50,7 +50,7 @@ def tomehardware_url(kw1, date, driver):
     # submit
     time_input1.submit()
     
-    time.sleep(5)
+    driver.implicitly_wait(10)
     # crawl data 
     # soup = BeautifulSoup(driver.page_source)
     
