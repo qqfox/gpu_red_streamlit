@@ -169,33 +169,28 @@ with header:
             submit_button = st.form_submit_button(label='Submit')
             
         if submit_button:
+            with st.echo():
+                from selenium import webdriver
+                from selenium.webdriver.chrome.options import Options
+                from selenium.webdriver.chrome.service import Service
+                from webdriver_manager.chrome import ChromeDriverManager
 
+                @st.experimental_singleton
+                def get_driver():
+                    return webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
-            try:
-                with st.echo():
-                   from selenium import webdriver
-                   from selenium.webdriver.chrome.options import Options
-                   from selenium.webdriver.chrome.service import Service
-                   from webdriver_manager.chrome import ChromeDriverManager
+                options = Options()
+                options.add_argument('--disable-gpu')
+                options.add_argument('--headless')
 
-                   @st.experimental_singleton
-                   def get_driver():
-                       return webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
-
-                   options = Options()
-                   options.add_argument('--disable-gpu')
-                   options.add_argument('--headless')
-
-                   driver = get_driver()
-                   df = tomehardware(keyword,start_date, driver=driver)
-                    
-                    # display the dataframe
-                   st.write(df.head())
-                    
-                   st.download_button(label = "Download Data", data = df.to_csv(),
-                                        file_name = "Tomhardware_dataset.csv",
-                                        mime='text/csv')
-            except:
-                print('There is somthing wrong with your query')    
+                driver = get_driver()
+                df = tomehardware(keyword,start_date, driver=driver)
+                 
+                 # display the dataframe
+                st.write(df.head())
+                 
+                st.download_button(label = "Download Data", data = df.to_csv(),
+                                     file_name = "Tomhardware_dataset.csv",
+                                     mime='text/csv')
 
     
