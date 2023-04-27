@@ -46,13 +46,10 @@ with header:
     st.session_state.phone = st.session_state.get('Minfactory')
     st.session_state.phone = st.session_state.get('Tomhardware')
     with st.sidebar:
-        radio = st.radio(
-        "Please select",
-        ('Reddit', 'Techpowerup','Amazon','Mindfactory','Tomhardware'))
+        radio = st.radio("Please select",('Reddit', 'Techpowerup','Amazon','Mindfactory','Tomhardware'))
         
 
 # process for reddit
-    # if st.session_state['type'] == "Reddit":
     if radio == "Reddit":
         st.header("Reddit Web scraping Dashboard")
 
@@ -86,49 +83,48 @@ with header:
                 print('There is somthing wrong with your query')
 # process for Techpowerup    
 
-    if radio == "Techpowerup":
-        st.header("Techpowerup Web scraping Dashboard")
+    elif st.session_state['type'] == 'Techpowerup':
             
             
-        with st.form(key='my_form_to_submit'):
-            st.text("This website does not have search function.")
-            st.text("Therefore, you need to fill in the links of forums you want to crawl, if more than two links, please separate by a comma , ")
-            st.text("For example: https://www.techpowerup.com/forums/forums/amd-ati-gpus.58/, https://www.techpowerup.com/forums/forums/overclocking-cooling.13/")
+            with st.form(key='my_form_to_submit'):
+                st.text("This website does not have search function.")
+                st.text("Therefore, you need to fill in the links of forums you want to crawl, if more than two links, please separate by a comma , ")
+                st.text("For example: https://www.techpowerup.com/forums/forums/amd-ati-gpus.58/, https://www.techpowerup.com/forums/forums/overclocking-cooling.13/")
 
-            urls_lst =  st.text_input("Please input links of forum here ")
-        
-            st.text("Please input the name of gpu card: ")
-            keyword_1 = st.text_input("For example: 6900 xt")                
+                urls_lst =  st.text_input("Please input links of forum here ")
             
-            st.text("The data is crawled if it is last updated within 3 months. ")
-            submit_button = st.form_submit_button(label='Submit')
+                st.text("Please input the name of gpu card: ")
+                keyword_1 = st.text_input("For example: 6900 xt")                
+                
+                st.text("The data is crawled if it is last updated within 3 months. ")
+                submit_button = st.form_submit_button(label='Submit')
+                
+            if submit_button:
+                
+                try:
+                    crawldata = []
+                    
+                    for url in urls_lst:
+                        techp = techPowerup_main(url,keyword_1)
+                        crawldata.append(techp)
+                    
+                    
+                    fin_tech = pd.concat(crawldata,axis=0)
+                    
+                    st.write(fin_tech.head())
+                    
+                    st.download_button(label = "Download Data", data = fin_tech.to_csv(),
+                                        file_name = "Techpowerup_dataset.csv",
+                                        mime='text/csv')
             
-        if submit_button:
-            
-            try:
-                crawldata = []
                 
-                for url in urls_lst:
-                    techp = techPowerup_main(url,keyword_1)
-                    crawldata.append(techp)
-                
-                
-                fin_tech = pd.concat(crawldata,axis=0)
-                
-                st.write(fin_tech.head())
-                
-                st.download_button(label = "Download Data", data = fin_tech.to_csv(),
-                                    file_name = "Techpowerup_dataset.csv",
-                                    mime='text/csv')
-        
-            
-            except:
-                print('There is somthing wrong with your query')
-            # display the dataframe
+                except:
+                    print('There is somthing wrong with your query')
+                # display the dataframe
                 
 # process for Amazon
 
-    if radio == "Amazon":
+    elif radio == "Amazon":
         st.header("Amazon Web scraping Dashboard")
         
         with st.form(key='my_form_to_submit'):
@@ -162,7 +158,7 @@ with header:
         
 # process for Mindfactory
 
-    if radio == "Mindfactory":
+    elif radio == "Mindfactory":
         st.header("Mindfactory Web scraping Dashboard")
         with st.form(key='my_form_to_submit'):
             start_date = st.text_input("Start date input: ")
@@ -188,7 +184,7 @@ with header:
 
 # Process for Tomhardware
     
-    if radio == 'Tomhardware':
+    elif radio == 'Tomhardware':
         
         st.header("Tomhardware Web scraping Dashboard")
         
@@ -204,22 +200,24 @@ with header:
         if submit_button:
             
         # with st.echo():
+            # from selenium import webdriver
+            # from selenium.webdriver.chrome.options import Options
+            # from selenium.webdriver.chrome.service import Service
+            # from webdriver_manager.chrome import ChromeDriverManager
 
+            # # @st.experimental_singleton # thay bang @st.experimental_singleton
+            # def get_driver():
+            #     return webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
-            # @st.experimental_singleton # thay bang @st.experimental_singleton
-            def get_driver():
-                return webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
-
-            options = Options()
-            options.add_argument('--disable-gpu')
-            options.add_argument('--headless')
-            driver = get_driver()
+            # options = Options()
+            # options.add_argument('--disable-gpu')
+            # options.add_argument('--headless')
+            # driver = get_driver()
                 
             try:
-                df = tomehardware(keyword,start_date,driver=driver)
+                df = tomehardware(keyword,start_date)
                 
                 # display the dataframe
-                
                 st.write(df.head())
                 
                 st.download_button(label = "Download Data", data = df.to_csv(),

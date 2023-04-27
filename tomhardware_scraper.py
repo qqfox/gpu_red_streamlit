@@ -16,13 +16,27 @@ from selenium import webdriver
 from datetime import datetime, timedelta
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
 
+# if crawl from local computer
 # path = 'C:\chromedriver.exe'
 # driver = webdriver.Chrome(path)
 # fillin and search
 
-def tomehardware(kw1, date,driver):
-        
+def tomehardware(kw1, date):
+    # start code trên streamlit
+    def get_driver():
+        return webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+
+    options = Options()
+    options.add_argument('--disable-gpu')
+    options.add_argument('--headless')
+
+    driver = get_driver()
+    # hết phần streamlit
     url = 'https://forums.tomshardware.com/search/'
     driver.get(url)
     kw2 = "".join(kw1.split())
