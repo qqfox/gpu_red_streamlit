@@ -93,7 +93,7 @@ with header:
             st.text("Therefore, you need to fill in the links of forums you want to crawl, if more than two links, please separate by a comma , ")
             st.text("For example: https://www.techpowerup.com/forums/forums/amd-ati-gpus.58/, https://www.techpowerup.com/forums/forums/overclocking-cooling.13/")
 
-            urls_lst =  st.text_input("Please input links of forum here ")
+            urls =  st.text_input("Please input links of forum here ")
         
             st.text("Please input the name of gpu card: ")
             keyword_1 = st.text_input("For example: 6900 xt")                
@@ -104,6 +104,7 @@ with header:
         if submit_button:
             
             try:
+                urls_lst = [urls]
                 crawldata = []
                 
                 for url in urls_lst:

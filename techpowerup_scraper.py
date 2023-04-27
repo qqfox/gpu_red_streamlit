@@ -168,5 +168,16 @@ def techPowerup_main(url, kw):
         
     return crawlDataframe 
 
-# example 
-# a = techPowerup_main('https://www.techpowerup.com/forums/forums/intel-arc-gpus.94/','A770')
+# crawldata = []
+# urls_lst = ['https://www.techpowerup.com/forums/forums/amd-ati-gpus.58/']
+# keyword_1 = '6700 xt'
+# for url in urls_lst:
+#     techp = techPowerup_main(url,keyword_1)
+#     crawldata.append(techp)
+
+
+# fin_tech = pd.concat(crawldata,axis=0)
+
+
+
+
