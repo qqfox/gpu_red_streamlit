@@ -35,12 +35,13 @@ def get_comments(submission):
             continue
     return comments
 
-def reddit_framework(keyword1, keyword2, start_date, end_date): # keyword input should be "6900 xt" and "6900xt"
+def reddit_framework(keyword1, start_date, end_date): # keyword input should be "6900 xt" and "6900xt"
     
     comments = []
     posts = []
     count = 0
     
+    keyword2 = "".join(keyword1.split())
     
     list_kw = [str(keyword1), str(keyword2)]
 
@@ -86,7 +87,7 @@ def reddit_framework(keyword1, keyword2, start_date, end_date): # keyword input 
     
 
 
-
+# df = reddit_framework("6700 xt", "2022-11-01", "2023-03-31")
 
 
 

@@ -64,13 +64,13 @@ with header:
             # end_date = st.write('End date:', d2)
             
             keyword_1 = st.text_input("Please input the name of gpu card: (ex: 6900 xt)")
-            keyword_2 = "".join(keyword_1.split())
+           
             
             submit_button = st.form_submit_button(label='Submit')
         
         if submit_button:
             try:
-                df = reddit_framework(keyword_1, keyword_2, start_date, end_date)
+                df = reddit_framework(keyword_1, start_date, end_date)
                 
                 # display the dataframe
                 
