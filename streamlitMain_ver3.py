@@ -83,7 +83,7 @@ with header:
                 print('There is somthing wrong with your query')
 # process for Techpowerup    
 
-    elif st.session_state['type'] == 'Techpowerup':
+    if st.session_state['type'] == 'Techpowerup':
             
             
             with st.form(key='my_form_to_submit'):
@@ -122,43 +122,10 @@ with header:
                     print('There is somthing wrong with your query')
                 # display the dataframe
                 
-# process for Amazon
-
-    elif radio == "Amazon":
-        st.header("Amazon Web scraping Dashboard")
-        
-        with st.form(key='my_form_to_submit'):
-    
-            # d1 = st.date_input("Define the start date for crawling.")
-            # start_date = st.write('Start date:', d1)
-            start_date = st.text_input("Start date input: ")
-            end_date = st.text_input("End date input: ")
-        
-            # d2 = st.date_input("Define the end date for crawling.")
-            # end_date = st.write('End date:', d2)
-            
-            keyword_1 = st.text_input("Please input the name of gpu card: (ex: 6900 xt)")
-            keyword_2 = "".join(keyword_1.split())
-            
-            submit_button = st.form_submit_button(label='Submit')
-        
-        if submit_button:
-            try:
-                df = reddit_framework(keyword_1, keyword_2, start_date, end_date)
-                
-                # display the dataframe
-                
-                st.write(df.head())
-                
-                st.download_button(label = "Download Data", data = df.to_csv(),
-                                    file_name = "Reddit_dataset.csv",
-                                    mime='text/csv')
-            except:
-                print('There is somthing wrong with your query')
         
 # process for Mindfactory
 
-    elif radio == "Mindfactory":
+    if radio == "Mindfactory":
         st.header("Mindfactory Web scraping Dashboard")
         with st.form(key='my_form_to_submit'):
             start_date = st.text_input("Start date input: ")
@@ -184,7 +151,7 @@ with header:
 
 # Process for Tomhardware
     
-    elif radio == 'Tomhardware':
+    if radio == 'Tomhardware':
         
         st.header("Tomhardware Web scraping Dashboard")
         
@@ -200,30 +167,33 @@ with header:
         if submit_button:
             
         # with st.echo():
-            # from selenium import webdriver
-            # from selenium.webdriver.chrome.options import Options
-            # from selenium.webdriver.chrome.service import Service
-            # from webdriver_manager.chrome import ChromeDriverManager
+            from selenium import webdriver
+            from selenium.webdriver.chrome.options import Options
+            from selenium.webdriver.chrome.service import Service
+            from webdriver_manager.chrome import ChromeDriverManager
 
-            # # @st.experimental_singleton # thay bang @st.experimental_singleton
-            # def get_driver():
-            #     return webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+            # @st.experimental_singleton # thay bang @st.experimental_singleton
+            def get_driver():
+                return webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
-            # options = Options()
-            # options.add_argument('--disable-gpu')
-            # options.add_argument('--headless')
-            # driver = get_driver()
+            options = Options()
+            options.add_argument('--disable-gpu')
+            options.add_argument('--headless')
+            driver = get_driver()
+            url = 'https://forums.tomshardware.com/search/'
+            driver.get(url)
+            st.code(driver.page_source)
                 
-            try:
-                df = tomehardware(keyword,start_date)
+            # try:
+            #     df = tomehardware(keyword,start_date)
                 
-                # display the dataframe
-                st.write(df.head())
+            #     # display the dataframe
+            #     st.write(df.head())
                 
-                st.download_button(label = "Download Data", data = df.to_csv(),
-                                    file_name = "Tomhardware_dataset.csv",
-                                    mime='text/csv')
-            except:
-                print('There is somthing wrong with your query')    
+            #     st.download_button(label = "Download Data", data = df.to_csv(),
+            #                         file_name = "Tomhardware_dataset.csv",
+            #                         mime='text/csv')
+            # except:
+            #     print('There is somthing wrong with your query')    
 
     
