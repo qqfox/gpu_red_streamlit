@@ -186,16 +186,12 @@ with header:
                 driver = get_driver()
                 url = 'https://forums.tomshardware.com/search/'
                 driver.get(url)
-                st.code(driver.page_source)
-                
-                kw2 = "".join(kw1.split())
-
                 # input keywords search
                 driver.implicitly_wait(10)
                 kw_input1 = driver.find_element(By.XPATH,"(//input[@class='input'])[3]")
                 # kw_input1.clear()
                 driver.implicitly_wait(10)
-                kw_input1.send_keys(str(kw1+'OR'+kw2))  # Variable 
+                kw_input1.send_keys(str(kw1))  # Variable 
                 
                 # check box
                 driver.implicitly_wait(5)
