@@ -25,7 +25,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 from reddit_scraper import reddit_framework
 from techpowerup_scraper import techPowerup_main
-from tomhardware_scraper import tomehardware, tomehardware_url
+from tomhardware_scraper2 import tomehardware
 from mindfactory_csraper import mindfactory
 
 # from selenium.webdriver.chrome.service import Service
@@ -178,51 +178,15 @@ with header:
                 @st.experimental_singleton
                 def get_driver():
                     return webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
-
-                options = Options()
-                options.add_argument('--disable-gpu')
-                options.add_argument('--headless')
-
                 driver = get_driver()
-                url = 'https://forums.tomshardware.com/search/'
-                driver.get(url)
-                # input keywords search
-                driver.implicitly_wait(10)
-                kw_input1 = driver.find_element(By.XPATH,"(//input[@class='input'])[3]")
-                # kw_input1.clear()
-                driver.implicitly_wait(10)
-                kw_input1.send_keys(str(kw1))  # Variable 
-                
-                # check box
-                driver.implicitly_wait(5)
-                driver.find_element(By.XPATH, "(//input[@name='c[title_only]']/following-sibling::i)[5]").click()
-                
-                # time range
-                time_input1 = driver.find_element(By.NAME,"c[newer_than]")
-                # time_input1.clear()
-                driver.implicitly_wait(2)
-                time_input1.send_keys(start_date)        # Variable 
-                
-                # submit
-                time_input1.submit()
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                # url_search = tomehardware_url(keyword,start_date, driver=driver)
-                # df = tomehardware(url_search)
+                options = Options()
+                df = tomehardware(kw1,start_date, driver=driver)
                  
-                #  # display the dataframe
-                # st.write(df.head())
+                  # display the dataframe
+                st.write(df.head())
                  
-                # st.download_button(label = "Download Data", data = df.to_csv(),
-                #                      file_name = "Tomhardware_dataset.csv",
-                #                      mime='text/csv')
+                st.download_button(label = "Download Data", data = df.to_csv(),
+                                      file_name = "Tomhardware_dataset.csv",
+                                      mime='text/csv')
 
     
