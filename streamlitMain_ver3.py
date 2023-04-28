@@ -174,12 +174,15 @@ with header:
                 from selenium.webdriver.chrome.options import Options
                 from selenium.webdriver.chrome.service import Service
                 from webdriver_manager.chrome import ChromeDriverManager
-
+            
                 @st.experimental_singleton
                 def get_driver():
                     return webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
-                driver = get_driver()
+            
                 options = Options()
+                options.add_argument('--disable-gpu')
+                options.add_argument('--headless')
+                driver = get_driver()
                 df = tomehardware(kw1,start_date, driver=driver)
                  
                   # display the dataframe

@@ -20,9 +20,9 @@ from selenium.webdriver.common.by import By
 
 # fillin and search
 
-def tomehardware(kw1, date):
-    path = 'C:\chromedriver.exe'
-    driver = webdriver.Chrome(path)   
+def tomehardware(kw1, date,driver):
+    # path = 'C:\chromedriver.exe'
+    # driver = webdriver.Chrome(path)   
     url = 'https://forums.tomshardware.com/search/'
     driver.get(url)
     kw2 = "".join(kw1.split())
