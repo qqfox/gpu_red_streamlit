@@ -109,8 +109,8 @@ def mindfactory(kw, start_date, end_date):
 
 
 
-# df = mindfactory("6700 xt","2022-12-01" )
-# df.to_csv('mindfactory_6700xt.csv')
+df = mindfactory("6700 xt","2022-12-01","2023-12-01" )
+df.to_csv('mindfactory_6700xt.csv')
 
     
     

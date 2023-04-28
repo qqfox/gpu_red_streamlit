@@ -227,10 +227,13 @@ for link in list_links:
     
 new_egg = pd.concat(dfs) 
 new_egg_final = new_egg.reset_index()
+# df['date_revs'] = pd.to_datetime(df['date_revs'], infer_datetime_format=True)
+# df_1 = df[df['date_revs'] <= end_date]
+# df_2 = df_1[df_1['date_revs'] >= start_date]
+# df_3 = df_2.reset_index(drop=True)
 
 # link = 'https://www.newegg.com/asrock-radeon-rx-6700-xt-rx6700xt-cld-12go/p/N82E16814930059?Description=6700xt&cm_re=6700xt-_-14-930-059-_-Product'
 # df = newegg(link)
-    
 
     
     
